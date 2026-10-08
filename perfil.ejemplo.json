@@ -1,0 +1,67 @@
+{
+  "_nota": "EJEMPLO con datos inventados. Claude lo copia a perfil.json y lo llena con tus datos reales. perfil.json NUNCA se sube a GitHub.",
+
+  "nombre": "Laura Camila Gómez Ruiz",
+  "email": "laura.gomez.ejemplo@gmail.com",
+  "telefono": "3001234567",
+  "cedula": "1000000000",
+  "expedicion": "15/01/2024 en Tunja, Boyacá",
+  "edad": 21,
+  "ciudad": "Bogotá D.C.",
+  "residencia": "Bogotá D.C., barrio Galerías (localidad Teusaquillo)",
+  "linkedin": "linkedin.com/in/laura-gomez-ejemplo",
+
+  "formacion": "Técnica en Sistemas del SENA (2023-2024).",
+  "nivel_estudios_regex": "t[eé]cnic",
+  "ingles": "Básico A2: lectura técnica sencilla.",
+  "transporte": "Transporte público (TransMilenio / SITP).",
+  "tallas": "Camisa M, pantalón 30, calzado 37.",
+  "disponibilidad": "Inmediata, presencial, híbrido o remoto; acepto turnos y fines de semana.",
+  "tiene_multas": false,
+
+  "salario": {
+    "desarrollo": "$2.500.000 a $3.000.000, abierta a conversar.",
+    "soporte_ti": "$1.800.000 a $2.000.000.",
+    "general": "Salario mínimo con prestaciones o lo que ofrezca la empresa."
+  },
+
+  "situacion": "Busco mi primer empleo formal después de la etapa productiva del SENA.",
+
+  "areas": {
+    "desarrollo": {
+      "nombre": "Desarrollo de software",
+      "busquedas_linkedin": ["desarrollador junior", "python junior", "desarrollador web junior"],
+      "busquedas_computrabajo": ["desarrollador junior", "programador junior"],
+      "cv": "cvs/adaptados/CV_Desarrollo.pdf"
+    },
+    "soporte_ti": {
+      "nombre": "Soporte técnico / mesa de ayuda",
+      "busquedas_linkedin": ["soporte técnico", "mesa de ayuda", "auxiliar de sistemas"],
+      "busquedas_computrabajo": ["soporte técnico", "auxiliar de sistemas"],
+      "cv": "cvs/adaptados/CV_Soporte.pdf",
+      "ajuste_encaje": -5
+    },
+    "general": {
+      "nombre": "Cualquier trabajo (cajera, bodega, ventas)",
+      "busquedas_linkedin": [],
+      "busquedas_computrabajo": ["cajera sin experiencia", "auxiliar de bodega", "asesora comercial temporada"],
+      "cv": "cvs/adaptados/CV_General.pdf"
+    }
+  },
+  "ubicaciones_linkedin": ["Colombia", "Bogotá, Distrito Capital, Colombia"],
+
+  "encaje": {
+    "positivas": {"python": 15, "junior": 10, "jr": 8, "sin experiencia": 10, "soporte": 6, "sena": 6, "practicante": 3, "remoto": 4},
+    "negativas": {"5 años": -20, "4 años": -15, "3 años": -10, "inglés avanzado": -10},
+    "titulo_afin": "python|desarrollador junior|soporte|mesa de ayuda|sistemas",
+    "titulo_descarta": "\\b(\\.net|c#|sap|salesforce|abap)\\b",
+    "habla_ingles": false,
+    "acepta_senior": false
+  },
+
+  "reglas": {
+    "postular_sin_preguntar": ["computrabajo", "linkedin_solicitud_sencilla"],
+    "max_linkedin_por_dia": 15,
+    "correos_a_empresas": "preguntar antes de enviar"
+  }
+}

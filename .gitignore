@@ -1,0 +1,21 @@
+# Datos personales: NUNCA se suben
+.env
+.env.*
+!.env.ejemplo
+perfil.json
+cvs/cv.json
+cvs/adaptados/
+cvs/originales/
+cvs/certificados/
+preparacion/
+cartas/
+*.db
+
+# Entorno
+.venv/
+__pycache__/
+*.pyc
+.vercel
+.DS_Store
+.idea/
+.vscode/

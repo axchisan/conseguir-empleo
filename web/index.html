@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mis Postulaciones</title>
+<style>
+:root {
+  --bg: #f4f2ee; --panel: #fffdf9; --ink: #1d1b18; --muted: #6f6a62; --line: #e3ded5;
+  --accent: #1f5f4a; --accent-soft: #e2efe9; --warn: #a3520f; --warn-soft: #fbeedd;
+  --bad: #9b2c2c; --bad-soft: #f8e3e3; --info: #2c4f8f; --info-soft: #e3eaf7; --gold: #8a6d0b; --gold-soft: #f6efd2;
+  --radius: 10px; --mono: ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #161513; --panel: #1f1d1a; --ink: #ece8e1; --muted: #a39d93; --line: #34312c;
+    --accent: #6fc4a3; --accent-soft: #1d3a30; --warn: #e9a462; --warn-soft: #3d2a17;
+    --bad: #ec8d8d; --bad-soft: #3d1f1f; --info: #8fb0ea; --info-soft: #1f2a3f; --gold: #e3c45c; --gold-soft: #3a3217;
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 14px/1.45 -apple-system, "Segoe UI", system-ui, sans-serif; }
+header { padding: 22px 24px 8px; display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 16px; }
+h1 { font-size: 22px; margin: 0; letter-spacing: -0.01em; }
+header .sub { color: var(--muted); }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; padding: 8px 24px 16px; }
+.stat { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 12px 14px; }
+.stat b { display: block; font-size: 24px; font-variant-numeric: tabular-nums; }
+.stat span { color: var(--muted); font-size: 12px; }
+.stat.hi { border-color: var(--accent); }
+nav { display: flex; gap: 4px; padding: 0 24px; border-bottom: 1px solid var(--line); overflow-x: auto; }
+nav button { background: none; border: 0; padding: 10px 14px; font: inherit; color: var(--muted); cursor: pointer; border-bottom: 2px solid transparent; white-space: nowrap; }
+nav button.on { color: var(--ink); border-color: var(--accent); font-weight: 600; }
+nav .count { font-size: 11px; background: var(--line); border-radius: 99px; padding: 1px 7px; margin-left: 4px; }
+main { padding: 16px 24px 40px; }
+.filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+input, select, textarea { font: inherit; color: var(--ink); background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 7px 10px; }
+input[type=search] { flex: 1 1 220px; }
+textarea { width: 100%; min-height: 80px; resize: vertical; }
+.table-wrap { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; }
+th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); font-weight: 600; position: sticky; top: 0; background: var(--panel); }
+tbody tr { cursor: pointer; }
+tbody tr:hover { background: var(--bg); }
+tbody tr:last-child td { border-bottom: 0; }
+td.t { font-weight: 600; }
+td .e { color: var(--muted); font-weight: 400; display: block; font-size: 12.5px; }
+.num { font-variant-numeric: tabular-nums; white-space: nowrap; color: var(--muted); }
+.pill { display: inline-block; font-size: 11.5px; padding: 2px 9px; border-radius: 99px; font-weight: 600; white-space: nowrap; }
+.s-preparada { background: var(--line); color: var(--muted); }
+.s-enviada { background: var(--info-soft); color: var(--info); }
+.s-vista { background: var(--gold-soft); color: var(--gold); }
+.s-respuesta, .s-entrevista { background: var(--accent-soft); color: var(--accent); }
+.s-oferta { background: var(--accent); color: var(--panel); }
+.s-rechazada { background: var(--bad-soft); color: var(--bad); }
+.s-descartada { background: var(--line); color: var(--muted); text-decoration: line-through; }
+.cat { font-size: 11px; color: var(--muted); }
+.due { color: var(--warn); font-weight: 600; }
+.empty { padding: 40px; text-align: center; color: var(--muted); }
+/* Drawer */
+.scrim { position: fixed; inset: 0; background: rgb(0 0 0 / .35); opacity: 0; pointer-events: none; transition: opacity .2s; }
+.scrim.on { opacity: 1; pointer-events: auto; }
+aside { position: fixed; top: 0; right: 0; height: 100%; width: min(560px, 100%); background: var(--panel); border-left: 1px solid var(--line);
+  transform: translateX(100%); transition: transform .22s ease; overflow-y: auto; padding: 22px 24px 40px; }
+aside.on { transform: none; }
+aside h2 { margin: 0 34px 2px 0; font-size: 19px; }
+aside .close { position: absolute; top: 16px; right: 16px; border: 0; background: var(--bg); border-radius: 8px; width: 32px; height: 32px; font-size: 18px; cursor: pointer; color: var(--ink); }
+.meta { display: grid; grid-template-columns: 130px 1fr; gap: 6px 12px; margin: 16px 0; font-size: 13.5px; }
+.meta dt { color: var(--muted); }
+.meta dd { margin: 0; word-break: break-word; }
+.section { margin-top: 20px; }
+.section h3 { font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin: 0 0 8px; }
+.desc { white-space: pre-wrap; font-size: 13px; background: var(--bg); border-radius: 8px; padding: 12px; max-height: 320px; overflow-y: auto; }
+.row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.btn { border: 1px solid var(--line); background: var(--panel); color: var(--ink); border-radius: 8px; padding: 7px 12px; cursor: pointer; font: inherit; }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--panel); font-weight: 600; }
+.btn:hover { filter: brightness(.97); }
+.ev { border-left: 2px solid var(--line); padding: 2px 0 8px 10px; font-size: 13px; }
+.ev small { color: var(--muted); font-family: var(--mono); font-size: 11px; }
+a { color: var(--info); }
+.toast { position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%); background: var(--ink); color: var(--panel); padding: 8px 14px; border-radius: 8px; opacity: 0; transition: opacity .2s; }
+.toast.on { opacity: 1; }
+@media (max-width: 640px) {
+  header, .stats, main, nav { padding-left: 16px; padding-right: 16px; }
+  .hide-sm { display: none; }
+  .meta { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>Mis postulaciones</h1>
+  <span class="sub" id="fecha"></span>
+</header>
+<section class="stats" id="stats"></section>
+<nav>
+  <button data-tab="post" class="on">Postulaciones <span class="count" id="c-post"></span></button>
+  <button data-tab="seg">Seguimiento <span class="count" id="c-seg"></span></button>
+  <button data-tab="ofe">Ofertas por revisar <span class="count" id="c-ofe"></span></button>
+</nav>
+<main>
+  <div class="filters" id="filters">
+    <input type="search" id="q" placeholder="Buscar empresa, cargo o nota…">
+    <select id="f-estado"><option value="">Todos los estados</option></select>
+    <select id="f-cat">
+      <option value="">Todas las áreas</option>
+    </select>
+    <select id="f-canal"><option value="">Todos los canales</option></select>
+  </div>
+  <div class="table-wrap"><table><thead id="thead"></thead><tbody id="tbody"></tbody></table></div>
+</main>
+<div class="scrim" id="scrim"></div>
+<aside id="drawer"></aside>
+<div class="toast" id="toast"></div>
+
+<script>
+const ESTADOS = ["preparada","enviada","vista","respuesta","entrevista","rechazada","oferta","descartada"];
+const NOMBRE = {preparada:"Preparada", enviada:"Enviada", vista:"HV vista", respuesta:"Respondieron", entrevista:"Entrevista / en proceso",
+  rechazada:"Rechazada", oferta:"¡Oferta!", descartada:"Descartada"};
+const CAT = new Proxy({desarrollo:"Desarrollo", soporte_ti:"Soporte TI", general:"General"}, {get: (t, k) => t[k] || (k ? String(k).replace(/_/g, " ") : "")});
+let post = [], ofertas = [], stats = {}, tab = "post";
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const pill = e => `<span class="pill s-${e}">${NOMBRE[e] || e}</span>`;
+const fmt = d => d ? new Date(d.length === 10 ? d + "T12:00" : d.replace(" ", "T")).toLocaleDateString("es-CO", {day:"numeric", month:"short"}) : "—";
+const api = (url, opts) => fetch(url, opts && {...opts, headers: {"Content-Type": "application/json"}, body: JSON.stringify(opts.body)})
+  .then(r => { if (r.status === 401) { location.href = "/login"; throw new Error("sesión"); } return r.json(); });
+
+function toast(msg) { const t = $("#toast"); t.textContent = msg; t.classList.add("on"); setTimeout(() => t.classList.remove("on"), 1600); }
+
+async function cargar() {
+  [post, ofertas, stats] = await Promise.all([api("/api/postulaciones"), api("/api/ofertas"), api("/api/stats")]);
+  $("#fecha").textContent = new Date().toLocaleDateString("es-CO", {weekday:"long", day:"numeric", month:"long"});
+  const pe = stats.por_estado;
+  const activos = (pe.enviada||0) + (pe.vista||0) + (pe.respuesta||0);
+  $("#stats").innerHTML = [
+    ["Total enviadas", stats.total - (pe.descartada||0) - (pe.preparada||0)],
+    ["Hoy", stats.hoy, true],
+    ["Esperando respuesta", activos],
+    ["HV vista", pe.vista||0],
+    ["Entrevistas / en proceso", (pe.entrevista||0) + (pe.respuesta||0), true],
+    ["Rechazadas", pe.rechazada||0],
+  ].map(([l, n, hi]) => `<div class="stat ${hi ? "hi" : ""}"><b>${n}</b><span>${l}</span></div>`).join("");
+  $("#c-post").textContent = post.filter(p => p.estado !== "descartada").length;
+  $("#c-seg").textContent = seguimiento().length;
+  $("#c-ofe").textContent = ofertas.length;
+  const canales = [...new Set(post.map(p => p.canal).filter(Boolean))].sort();
+  $("#f-canal").innerHTML = `<option value="">Todos los canales</option>` + canales.map(c => `<option>${esc(c)}</option>`).join("");
+  const areas = [...new Set([...post, ...ofertas].map(p => p.categoria).filter(Boolean))].sort();
+  $("#f-cat").innerHTML = `<option value="">Todas las áreas</option>` + areas.map(a => `<option value="${esc(a)}">${esc(CAT[a])}</option>`).join("");
+  pintar();
+}
+
+function seguimiento() {
+  const hoy = stats.hoy_fecha;
+  return post.filter(p => ["enviada","vista","respuesta","entrevista","preparada"].includes(p.estado) &&
+    (p.estado === "entrevista" || p.estado === "respuesta" || p.estado === "preparada" || (p.proximo_seguimiento && p.proximo_seguimiento <= hoy)));
+}
+
+function filtrar(lista) {
+  const q = $("#q").value.toLowerCase(), est = $("#f-estado").value, cat = $("#f-cat").value, can = $("#f-canal").value;
+  return lista.filter(p => (!q || [p.empresa, p.titulo, p.notas, p.canal].join(" ").toLowerCase().includes(q))
+    && (!est || p.estado === est) && (!cat || p.categoria === cat) && (!can || p.canal === can));
+}
+
+function pintar() {
+  const hoy = stats.hoy_fecha;
+  $("#f-estado").parentElement.style.display = "";
+  if (tab === "ofe") {
+    $("#f-estado").style.display = "none"; $("#f-canal").style.display = "none";
+    const q = $("#q").value.toLowerCase(), cat = $("#f-cat").value;
+    const lista = ofertas.filter(o => (!q || (o.empresa + " " + o.titulo).toLowerCase().includes(q)) && (!cat || o.categoria === cat));
+    $("#thead").innerHTML = `<tr><th>Encaje</th><th>Oferta</th><th class="hide-sm">Ciudad</th><th class="hide-sm">Postulantes</th><th class="hide-sm">Publicada</th><th></th></tr>`;
+    $("#tbody").innerHTML = lista.length ? lista.map(o => `<tr data-o="${o.id}">
+      <td class="num"><b>${o.encaje ?? "—"}</b></td>
+      <td class="t">${esc(o.titulo)}<span class="e">${esc(o.empresa)} · <span class="cat">${CAT[o.categoria] || ""}</span>${o.emails ? " · ✉︎ " + esc(o.emails) : ""}</span></td>
+      <td class="hide-sm">${esc((o.ciudad||"").replace(", Capital District, Colombia",""))}</td>
+      <td class="num hide-sm">${o.num_postulantes ?? "—"}</td>
+      <td class="num hide-sm">${esc(o.publicada || "")}</td>
+      <td class="row" style="flex-wrap:nowrap">
+        ${o.url ? `<a class="btn" href="${esc(o.url)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">Ver</a>` : ""}
+        <button class="btn" onclick="event.stopPropagation(); accionOferta(${o.id}, 'preparar')">Postular</button>
+        <button class="btn" onclick="event.stopPropagation(); accionOferta(${o.id}, 'descartar')">✕</button>
+      </td></tr>`).join("") : `<tr><td colspan="6" class="empty">No hay ofertas pendientes de revisar.</td></tr>`;
+    return;
+  }
+  $("#f-estado").style.display = ""; $("#f-canal").style.display = "";
+  const base = tab === "seg" ? seguimiento() : post.filter(p => $("#f-estado").value === "descartada" || p.estado !== "descartada");
+  const lista = filtrar(base);
+  $("#thead").innerHTML = `<tr><th>Fecha</th><th>Cargo · Empresa</th><th>Estado</th><th class="hide-sm">Canal</th><th class="hide-sm">Seguimiento</th><th class="hide-sm">Notas</th></tr>`;
+  $("#tbody").innerHTML = lista.length ? lista.map(p => `<tr data-p="${p.id}">
+    <td class="num">${fmt(p.fecha_envio || p.creado)}</td>
+    <td class="t">${esc(p.titulo)}<span class="e">${esc(p.empresa)} · <span class="cat">${CAT[p.categoria] || ""}</span></span></td>
+    <td>${pill(p.estado)}</td>
+    <td class="hide-sm">${esc(p.canal || "")}</td>
+    <td class="num hide-sm ${p.proximo_seguimiento && p.proximo_seguimiento <= hoy ? "due" : ""}">${fmt(p.proximo_seguimiento)}</td>
+    <td class="hide-sm" style="max-width:280px;color:var(--muted);font-size:12.5px">${esc((p.notas || "").slice(0, 110))}</td>
+  </tr>`).join("") : `<tr><td colspan="6" class="empty">${tab === "seg" ? "Nada pendiente de seguimiento hoy." : "Sin resultados con estos filtros."}</td></tr>`;
+}
+
+async function abrir(id) {
+  const p = await api("/api/postulaciones/" + id);
+  const d = $("#drawer");
+  d.innerHTML = `<button class="close" onclick="cerrar()">×</button>
+    <h2>${esc(p.titulo)}</h2><div style="color:var(--muted)">${esc(p.empresa)}</div>
+    <div class="row" style="margin-top:14px">
+      <select id="d-estado">${ESTADOS.map(e => `<option value="${e}" ${e === p.estado ? "selected" : ""}>${NOMBRE[e]}</option>`).join("")}</select>
+      <label class="row" style="gap:6px;color:var(--muted)">Seguimiento <input type="date" id="d-seg" value="${p.proximo_seguimiento || ""}"></label>
+      ${p.url ? `<a class="btn" href="${esc(p.url)}" target="_blank" rel="noopener">Abrir oferta ↗</a>` : ""}
+    </div>
+    <dl class="meta">
+      <dt>Enviada</dt><dd>${esc(p.fecha_envio || "—")}</dd>
+      <dt>Canal</dt><dd>${esc(p.canal || "—")}</dd>
+      <dt>CV usado</dt><dd>${esc(p.cv_usado || "—")}</dd>
+      <dt>Área</dt><dd>${CAT[p.categoria] || "—"}</dd>
+      ${p.ciudad ? `<dt>Ciudad</dt><dd>${esc(p.ciudad)}</dd>` : ""}
+      ${p.salario ? `<dt>Salario</dt><dd>${esc(p.salario)}</dd>` : ""}
+      ${p.num_postulantes ? `<dt>Postulantes</dt><dd>${p.num_postulantes}</dd>` : ""}
+      ${p.emails ? `<dt>Correos</dt><dd>${esc(p.emails)}</dd>` : ""}
+    </dl>
+    <div class="section"><h3>Notas</h3><textarea id="d-notas">${esc(p.notas || "")}</textarea>
+      <div class="row" style="margin-top:8px"><button class="btn primary" onclick="guardar(${p.id})">Guardar cambios</button></div></div>
+    ${p.contactos.length ? `<div class="section"><h3>Contactos</h3>${p.contactos.map(c => `<div class="ev"><b>${esc(c.nombre || "")}</b> ${esc(c.cargo || "")}<br>${c.email ? `<a href="mailto:${esc(c.email)}">${esc(c.email)}</a>` : ""} ${esc(c.telefono || "")}</div>`).join("")}</div>` : ""}
+    <div class="section"><h3>Historial</h3>
+      <div class="row" style="margin-bottom:10px"><input id="d-ev" placeholder="Ej: me llamaron, entrevista el jueves 10am…" style="flex:1"><button class="btn" onclick="evento(${p.id})">Agregar</button></div>
+      ${p.eventos.map(e => `<div class="ev"><small>${esc(e.fecha)} · ${esc(e.tipo)}</small><br>${esc(e.detalle)}</div>`).join("") || `<div style="color:var(--muted);font-size:13px">Sin eventos todavía.</div>`}
+    </div>
+    ${p.descripcion ? `<div class="section"><h3>Descripción de la oferta</h3><div class="desc">${esc(p.descripcion)}</div></div>` : ""}`;
+  d.classList.add("on"); $("#scrim").classList.add("on");
+}
+function cerrar() { $("#drawer").classList.remove("on"); $("#scrim").classList.remove("on"); }
+
+async function guardar(id) {
+  await api("/api/postulaciones/" + id, {method: "PATCH", body: {estado: $("#d-estado").value, notas: $("#d-notas").value, proximo_seguimiento: $("#d-seg").value || null}});
+  toast("Guardado"); await cargar(); abrir(id);
+}
+async function evento(id) {
+  const v = $("#d-ev").value.trim(); if (!v) return;
+  await api(`/api/postulaciones/${id}/eventos`, {method: "POST", body: {tipo: "nota", detalle: v}});
+  toast("Agregado"); abrir(id);
+}
+async function accionOferta(id, accion) {
+  await api(`/api/ofertas/${id}/${accion}`, {method: "POST", body: {}});
+  toast(accion === "preparar" ? "Marcada para postular" : "Descartada"); cargar();
+}
+
+$("#f-estado").innerHTML += ESTADOS.map(e => `<option value="${e}">${NOMBRE[e]}</option>`).join("");
+document.querySelectorAll("nav button").forEach(b => b.onclick = () => {
+  document.querySelectorAll("nav button").forEach(x => x.classList.toggle("on", x === b)); tab = b.dataset.tab; pintar();
+});
+["#q", "#f-estado", "#f-cat", "#f-canal"].forEach(s => $(s).addEventListener("input", pintar));
+$("#tbody").addEventListener("click", e => { const tr = e.target.closest("tr[data-p]"); if (tr) abrir(tr.dataset.p); });
+$("#scrim").onclick = cerrar;
+document.addEventListener("keydown", e => e.key === "Escape" && cerrar());
+cargar();
+setInterval(cargar, 120000);
+</script>
+</body>
+</html>

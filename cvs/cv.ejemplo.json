@@ -1,0 +1,49 @@
+{
+  "_nota": "EJEMPLO con datos inventados. Claude lo copia a cvs/cv.json y lo llena con tu experiencia REAL (nunca inventar nada). Cada variante es un CV enfocado a un tipo de cargo.",
+
+  "nombre_lineas": ["Laura Camila", "Gómez Ruiz"],
+  "contacto": ["Bogotá D.C., Colombia", "+57 300 123 4567", "laura.gomez.ejemplo@gmail.com", "linkedin.com/in/laura-gomez-ejemplo"],
+  "idiomas": ["Español — nativo", "Inglés — básico (A2)"],
+  "pie": "Disponibilidad inmediata · Bogotá D.C. · presencial, híbrido o remoto",
+
+  "formacion": [
+    {"titulo": "Técnica en Sistemas", "institucion": "SENA — Centro de Gestión de Mercados · Bogotá", "fechas": "2023 – 2024", "nota": "Etapa productiva culminada"},
+    {"titulo": "Bachiller Académico", "institucion": "Colegio Ejemplo · Tunja", "fechas": "2021", "nota": ""}
+  ],
+  "certificaciones": [
+    {"titulo": "Fundamentos de Python", "entidad": "SENA Sofia Plus", "fecha": "Mar 2024"}
+  ],
+
+  "variantes": {
+    "CV_Desarrollo": {
+      "titulo": "Técnica en Sistemas · Desarrolladora Junior",
+      "subtitulo": "Python · HTML/CSS · SQL · Git",
+      "perfil": "Técnica en Sistemas del SENA con práctica en desarrollo web. Aprendo rápido, trabajo bien en equipo y me interesa crecer como desarrolladora.",
+      "habilidades": [["Lenguajes", "Python · JavaScript básico"], ["Bases de datos", "MySQL · consultas SQL"], ["Herramientas", "Git · VS Code"]],
+      "experiencia": [
+        {"cargo": "Aprendiz SENA — Desarrollo", "empresa": "Empresa Ejemplo S.A.S. — Bogotá", "fechas": "Jul 2024 – Dic 2024",
+         "contexto": "", "puntos": ["Desarrollé formularios internos en Python.", "Apoyé pruebas y corrección de errores."]}
+      ]
+    },
+    "CV_Soporte": {
+      "titulo": "Técnica en Sistemas · Soporte TI",
+      "subtitulo": "Soporte a usuarios · Mantenimiento de equipos · Redes básicas",
+      "perfil": "Técnica en Sistemas con experiencia atendiendo usuarios, instalando software y resolviendo incidencias de primer nivel.",
+      "habilidades": [["Soporte", "Atención a usuarios · tickets"], ["Sistemas operativos", "Windows · Linux básico"], ["Hardware", "Mantenimiento preventivo y correctivo"]],
+      "experiencia": [
+        {"cargo": "Aprendiz SENA — Soporte", "empresa": "Empresa Ejemplo S.A.S. — Bogotá", "fechas": "Jul 2024 – Dic 2024",
+         "contexto": "", "puntos": ["Atendí solicitudes de soporte de primer nivel.", "Instalé y configuré equipos y software."]}
+      ]
+    },
+    "CV_General": {
+      "titulo": "Auxiliar · Atención al cliente",
+      "subtitulo": "Servicio al cliente · Manejo de caja · Trabajo en equipo",
+      "perfil": "Persona responsable, puntual y con buena actitud de servicio. Disponibilidad para turnos y fines de semana.",
+      "habilidades": [["Servicio", "Atención al cliente"], ["Herramientas", "Excel básico · computador"], ["Personales", "Responsabilidad · trabajo en equipo"]],
+      "experiencia": [
+        {"cargo": "Vendedora (temporada)", "empresa": "Almacén Ejemplo — Tunja", "fechas": "Dic 2023", "contexto": "",
+         "puntos": ["Atendí clientes y manejé caja.", "Organicé inventario en bodega."]}
+      ]
+    }
+  }
+}
